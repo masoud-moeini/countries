@@ -1,26 +1,36 @@
-import React from "react";
+import React, { Component } from "react";
+import { ToastContainer } from "react-toastify";
+import http from "./services/httpService";
+import config from "./config.json";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 
-// TODO: add initial scss rules
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    countries: []
+  };
+  async componentDidMount() {
+    const { data: countries } = await http.get(config.apiEndpoint);
+    this.setState({ countries });
+  }
+  render() {
+    return (
+      <div>
+        <ToastContainer />
+        {this.state.countries.map(country => (
+          <div key={country.alpha3Code}>
+            <span>{country.name}</span>
+            <span>{country.capital}</span>
+            <span>{country.alpha3Code}</span>
+            <span>{country.callingCodes}</span>
+            <span>{country.population}</span>
+            <span>{country.area}</span>
+            <span>{country.region}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default App;
