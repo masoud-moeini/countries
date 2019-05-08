@@ -1,33 +1,71 @@
-.App {
-  text-align: center;
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.table {
+  color: #626e81;
+  border-radius: 5px;
+  border: 1px solid #eef1f7;
+
+  margin: 10vh 0 0 0;
+  background-color: #fff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+.table-row {
+  display: grid;
+  grid-template-columns: 150px 130px 80px 80px 130px 130px 90px 55px 1fr;
+  border-top: 1px solid #eef1f7;
+  padding: 5px 0;
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  &:last-child {
+    border-bottom: 1px solid #eef1f7;
   }
-  to {
-    transform: rotate(360deg);
+
+  div {
+    // background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+
+    span {
+      white-space: nowrap;
+      width: 100%;
+      text-overflow: ellipsis;
+      display: block;
+      overflow: hidden;
+      padding: 0 7px 0 0;
+    }
+    span.country-name {
+      color: #365075;
+      font-size: 15px;
+    }
+    button {
+      font-size: 12px;
+      color: #0e89ff;
+      border: 1px solid #0e89ff;
+      background-color: #e5eeff;
+      border-radius: 4px;
+      padding: 5px;
+      cursor: pointer;
+      transition: all 0.25s;
+      &:hover {
+        background-color: #0e89ff;
+        color: #e5eeff;
+      }
+    }
   }
 }
+
+.table-head {
+  color: #96abc9;
+  font-size: 15px;
+  margin: 0 0 10px 0;
+  border: none;
+  font-weight: bold;
+}
+
+// title : #96ABC9
+
+// know more : text : #0E89FF , bg : #E5EEFF
