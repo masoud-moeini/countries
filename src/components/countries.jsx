@@ -18,6 +18,7 @@ class Countries extends Component {
   }
 
   handleLike = countryId => {
+    console.log(countryId);
     const countries = this.state.countries.map(country =>
       country.id === countryId ? { ...country, like: !country.like } : country
     );

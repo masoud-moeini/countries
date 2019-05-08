@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Like from "./like";
 
 class Country extends Component {
   state = {};
@@ -31,9 +32,10 @@ class Country extends Component {
           <span>{this.props.country.region}</span>
         </div>
         <div>
-          <span onClick={() => this.props.onLike(this.props.country.id)}>
-            like
-          </span>
+          <Like
+            liked={this.props.country.like}
+            onLikeToggle={() => this.props.onLike(this.props.country.id)}
+          />
         </div>
         <div>
           <button onClick={() => this.openCountry(this.props.country)}>

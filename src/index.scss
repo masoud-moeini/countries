@@ -1,5 +1,5 @@
-:root {
-}
+@import "./assets/sass/variables";
+@import "./assets/sass/fonticons";
 
 @mixin breakpoint($point) {
   @if $point == phone {
@@ -57,7 +57,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(236, 236, 236);
+  background-color: #f7f8fa;
   font-size: 14px;
 }
 

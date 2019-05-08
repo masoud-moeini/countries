@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { ToastContainer } from "react-toastify";
 import Countries from "./components/countries";
-
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 
