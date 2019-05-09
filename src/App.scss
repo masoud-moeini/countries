@@ -1,22 +1,23 @@
 .container {
   max-width: 1000px;
   margin: 0 auto;
+  padding: 10vh 0;
 }
 
 .table {
   color: #626e81;
   border-radius: 5px;
-  border: 1px solid #eef1f7;
 
-  margin: 10vh 0 0 0;
-  background-color: #fff;
+  background-color: #f7f8fa;
 }
 
 .table-row {
   display: grid;
-  grid-template-columns: 150px 130px 80px 80px 130px 130px 90px 55px 1fr;
-  border-top: 1px solid #eef1f7;
+  grid-template-columns: 150px 130px 80px 80px 130px 130px 90px 35px 1fr;
+  border: 1px solid #eef1f7;
+  margin: 0 0 2px 0;
   padding: 5px 0;
+  background-color: #fff;
 
   &:last-child {
     border-bottom: 1px solid #eef1f7;
@@ -61,9 +62,11 @@
 .table-head {
   color: #96abc9;
   font-size: 15px;
-  margin: 0 0 10px 0;
+  margin: 0 0 6px 0;
   border: none;
   font-weight: bold;
+  border: 1px solid #eef1f7;
+  padding: 10px 0;
 }
 
 // title : #96ABC9
