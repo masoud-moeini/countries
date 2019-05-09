@@ -11,6 +11,10 @@ ul.pagination {
     cursor: pointer;
     margin: 10px 5px 0 0;
 
+    &:hover {
+      background-color: rgba(#8ccccf, 0.2);
+    }
+
     &.active {
       background-color: #8ccccf;
       color: #ffffff;
