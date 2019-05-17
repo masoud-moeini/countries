@@ -4,6 +4,7 @@ import config from "../config.json";
 import Country from "./country";
 import Pagination from "./pagination";
 import { paginate } from "./../utils/paginate";
+import db from "./../utils/db";
 
 class Countries extends Component {
   state = {
@@ -11,22 +12,48 @@ class Countries extends Component {
     pageSize: 10,
     currentPage: 1
   };
-  async componentDidMount() {
+  componentDidMount() {
+    db.table("countries")
+      .toArray()
+      .then(countries => {
+        if (countries.length > 0) {
+          this.setState({ countries });
+        } else {
+          this.getCountries();
+        }
+      });
+  }
+
+  async getCountries() {
     let { data: countries } = await http.get(config.apiEndpoint);
     countries = countries.map((country, index) => ({
       ...country,
-      like: false,
-      id: index
+      like: false
     }));
-    this.setState({ countries });
+
+    db.countries.bulkAdd(countries).then(id => {
+      db.table("countries")
+        .toArray()
+        .then(countries => {
+          this.setState({ countries });
+        });
+    });
   }
 
   handleLike = countryId => {
-    console.log(countryId);
-    const countries = this.state.countries.map(country =>
-      country.id === countryId ? { ...country, like: !country.like } : country
-    );
-    this.setState({ countries });
+    var _this = this;
+    db.countries.get(countryId).then(function(country) {
+      const like = !country.like;
+      db.table("countries")
+        .update(countryId, { like })
+        .then(() => {
+          db.table("countries")
+            .toArray()
+            .then(countries => {
+              _this.setState({ countries });
+            });
+        });
+    });
   };
 
   handlePageChange = page => {
@@ -40,6 +67,7 @@ class Countries extends Component {
     if (length === 0) return <p>Wait for Countries to be loaded</p>;
 
     const countries = paginate(allCountries, currentPage, pageSize);
+    console.log(countries);
     return (
       <React.Fragment>
         <p>Showing {length} countries in the world</p>
