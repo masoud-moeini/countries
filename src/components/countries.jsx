@@ -5,12 +5,14 @@ import Country from "./country";
 import Pagination from "./pagination";
 import { paginate } from "./../utils/paginate";
 import db from "./../utils/db";
+import ShowLiked from "./showLiked";
 
 class Countries extends Component {
   state = {
     countries: [],
     pageSize: 10,
-    currentPage: 1
+    currentPage: 1,
+    toSelectCategory: "liked"
   };
   componentDidMount() {
     db.table("countries")
@@ -60,17 +62,42 @@ class Countries extends Component {
     this.setState({ currentPage: page });
   };
 
+  handleFilter = () => {
+    if (this.state.toSelectCategory === "all") {
+      this.setState({ toSelectCategory: "liked", currentPage: 1 });
+    } else {
+      this.setState({ toSelectCategory: "all", currentPage: 1 });
+    }
+  };
+
   // TODO: separate get service in another file and initilize countries by a method from that service
   render() {
     const { length } = this.state.countries;
-    const { pageSize, currentPage, countries: allCountries } = this.state;
+    const {
+      pageSize,
+      currentPage,
+      countries: allCountries,
+      toSelectCategory
+    } = this.state;
+
     if (length === 0) return <p>Wait for Countries to be loaded</p>;
 
-    const countries = paginate(allCountries, currentPage, pageSize);
-    console.log(countries);
+    const filtered =
+      toSelectCategory === "all"
+        ? allCountries.filter(m => m.like)
+        : allCountries;
+
+    const countries = paginate(filtered, currentPage, pageSize);
     return (
       <React.Fragment>
-        <p>Showing {length} countries in the world</p>
+        <div className="table-title">
+          <span>Showing {filtered.length} countries in the world</span>
+          <ShowLiked
+            toSelectItem={toSelectCategory}
+            onButtonSelect={this.handleFilter}
+          />
+        </div>
+
         <div className="table">
           <div className="table-row table-head">
             <div>
@@ -107,7 +134,7 @@ class Countries extends Component {
           ))}
         </div>
         <Pagination
-          itemsCount={length}
+          itemsCount={filtered.length}
           pageSize={pageSize}
           onPageChange={this.handlePageChange}
           currentPage={currentPage}

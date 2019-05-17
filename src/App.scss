@@ -7,7 +7,7 @@
 .table {
   color: #626e81;
   border-radius: 5px;
-
+  margin: 10px 0 0 0;
   background-color: #f7f8fa;
 }
 
@@ -67,6 +67,21 @@
   border: none;
   border: 1px solid #eef1f7;
   padding: 10px 0;
+}
+
+.table-title {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    border: none;
+    width: 135px;
+    padding: 5px 0;
+    border-radius: 5px;
+    background-color: #6db1b4;
+    color: #ffffff;
+    cursor: pointer;
+  }
 }
 
 // title : #96ABC9
