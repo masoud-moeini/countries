@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import http from "../services/httpService";
 import config from "../config.json";
-import Country from "./country";
 import Pagination from "./pagination";
 import { paginate } from "./../utils/paginate";
 import db from "./../utils/db";
 import ShowLiked from "./showLiked";
+import CountriesTable from "./countriesTable";
+import _ from "lodash";
 
 class Countries extends Component {
   state = {
     countries: [],
     pageSize: 10,
     currentPage: 1,
-    toSelectCategory: "liked"
+    toSelectCategory: "liked",
+    sortColumn: { path: "population", order: "desc" }
   };
   componentDidMount() {
     db.table("countries")
@@ -28,10 +30,18 @@ class Countries extends Component {
 
   async getCountries() {
     let { data: countries } = await http.get(config.apiEndpoint);
-    countries = countries.map((country, index) => ({
-      ...country,
-      like: false
-    }));
+    countries = countries.map((country, index) => {
+      let area = country.area;
+      if (area === null) {
+        area = 0;
+      }
+
+      return {
+        ...country,
+        like: false,
+        area: area
+      };
+    });
 
     db.countries.bulkAdd(countries).then(id => {
       db.table("countries")
@@ -43,8 +53,7 @@ class Countries extends Component {
   }
 
   handleLike = countryId => {
-    var _this = this;
-    db.countries.get(countryId).then(function(country) {
+    db.countries.get(countryId).then(country => {
       const like = !country.like;
       db.table("countries")
         .update(countryId, { like })
@@ -52,7 +61,7 @@ class Countries extends Component {
           db.table("countries")
             .toArray()
             .then(countries => {
-              _this.setState({ countries });
+              this.setState({ countries });
             });
         });
     });
@@ -70,6 +79,10 @@ class Countries extends Component {
     }
   };
 
+  handleSort = sortColumn => {
+    this.setState({ sortColumn });
+  };
+
   // TODO: separate get service in another file and initilize countries by a method from that service
   render() {
     const { length } = this.state.countries;
@@ -77,7 +90,8 @@ class Countries extends Component {
       pageSize,
       currentPage,
       countries: allCountries,
-      toSelectCategory
+      toSelectCategory,
+      sortColumn
     } = this.state;
 
     if (length === 0) return <p>Wait for Countries to be loaded</p>;
@@ -87,7 +101,9 @@ class Countries extends Component {
         ? allCountries.filter(m => m.like)
         : allCountries;
 
-    const countries = paginate(filtered, currentPage, pageSize);
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+
+    const countries = paginate(sorted, currentPage, pageSize);
     return (
       <React.Fragment>
         <div className="table-title">
@@ -98,41 +114,12 @@ class Countries extends Component {
           />
         </div>
 
-        <div className="table">
-          <div className="table-row table-head">
-            <div>
-              <span>Name</span>
-            </div>
-            <div>
-              <span>Capital</span>
-            </div>
-            <div>
-              <span>Alpha Code</span>
-            </div>
-            <div>
-              <span>Calling Code</span>
-            </div>
-            <div>
-              <span>Population</span>
-            </div>
-            <div>
-              <span>Area (km2)</span>
-            </div>
-            <div>
-              <span>Region</span>
-            </div>
-            <div />
-            <div />
-          </div>
-
-          {countries.map(country => (
-            <Country
-              country={country}
-              key={country.id}
-              onLike={this.handleLike}
-            />
-          ))}
-        </div>
+        <CountriesTable
+          countries={countries}
+          sortColumn={sortColumn}
+          onLike={this.handleLike}
+          onSort={this.handleSort}
+        />
         <Pagination
           itemsCount={filtered.length}
           pageSize={pageSize}
