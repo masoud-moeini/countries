@@ -103,6 +103,8 @@ class Countries extends Component {
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
+    // here it goes search functionality
+
     const countries = paginate(sorted, currentPage, pageSize);
     return (
       <React.Fragment>
