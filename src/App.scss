@@ -84,6 +84,27 @@
   }
 }
 
+.search-row {
+  display: grid;
+  grid-template-columns: 140px 120px;
+  margin: 0 0 5px 0;
+  & div {
+    height: 25px;
+    padding: 0 10px 0 0;
+    & input {
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+      color: #365075;
+      border: 1px solid #eef1f7;
+      transition: all 0.2s;
+      &:focus {
+        border-color: darken(#eef1f7, 10%);
+      }
+    }
+  }
+}
+
 // title : #96ABC9
 
 // know more : text : #0E89FF , bg : #E5EEFF

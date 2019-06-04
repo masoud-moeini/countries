@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../assets/sass/components/like.scss";
 
 class Like extends Component {
   state = {};

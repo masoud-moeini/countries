@@ -14,7 +14,11 @@ class Countries extends Component {
     pageSize: 10,
     currentPage: 1,
     toSelectCategory: "liked",
-    sortColumn: { path: "population", order: "desc" }
+    sortColumn: { path: "population", order: "desc" },
+    userInputs: {
+      nameSearch: "",
+      capitalSearch: ""
+    }
   };
   componentDidMount() {
     db.table("countries")
@@ -83,6 +87,12 @@ class Countries extends Component {
     this.setState({ sortColumn });
   };
 
+  handleInputChange = e => {
+    const userInputs = { ...this.state.userInputs };
+    userInputs[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ userInputs });
+  };
+
   // TODO: separate get service in another file and initilize countries by a method from that service
   render() {
     const { length } = this.state.countries;
@@ -103,13 +113,25 @@ class Countries extends Component {
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
+    const searched = sorted
+      .filter(country => {
+        return country.name
+          .toLowerCase()
+          .includes(this.state.userInputs.nameSearch.toLowerCase());
+      })
+      .filter(country => {
+        return country.capital
+          .toLowerCase()
+          .includes(this.state.userInputs.capitalSearch.toLowerCase());
+      });
+
     // here it goes search functionality
 
-    const countries = paginate(sorted, currentPage, pageSize);
+    const countries = paginate(searched, currentPage, pageSize);
     return (
       <React.Fragment>
         <div className="table-title">
-          <span>Showing {filtered.length} countries in the world</span>
+          <span>Showing {searched.length} countries in the world</span>
           <ShowLiked
             toSelectItem={toSelectCategory}
             onButtonSelect={this.handleFilter}
@@ -121,9 +143,11 @@ class Countries extends Component {
           sortColumn={sortColumn}
           onLike={this.handleLike}
           onSort={this.handleSort}
+          inputChanges={this.handleInputChange}
+          userInputs={this.state.userInputs}
         />
         <Pagination
-          itemsCount={filtered.length}
+          itemsCount={searched.length}
           pageSize={pageSize}
           onPageChange={this.handlePageChange}
           currentPage={currentPage}
