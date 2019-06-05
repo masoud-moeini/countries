@@ -23,10 +23,10 @@ class Country extends Component {
           <span>{this.props.country.callingCodes}</span>
         </div>
         <div>
-          <span>{this.props.country.population}</span>
+          <span>{this.props.country.population.toLocaleString()}</span>
         </div>
         <div>
-          <span>{this.props.country.area}</span>
+          <span>{this.props.country.area.toLocaleString()}</span>
         </div>
         <div>
           <span>{this.props.country.region}</span>
