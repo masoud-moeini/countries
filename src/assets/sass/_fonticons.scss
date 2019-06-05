@@ -2,14 +2,14 @@
 
 @font-face {
   font-family: "#{$icomoon-font-family}";
-  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?lm3g81");
-  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?lm3g81#iefix")
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?rezf1q");
+  src: url("#{$icomoon-font-path}/#{$icomoon-font-family}.eot?rezf1q#iefix")
       format("embedded-opentype"),
-    url("#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?lm3g81")
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?rezf1q")
       format("truetype"),
-    url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff?lm3g81")
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.woff?rezf1q")
       format("woff"),
-    url("#{$icomoon-font-path}/#{$icomoon-font-family}.svg?lm3g81##{$icomoon-font-family}")
+    url("#{$icomoon-font-path}/#{$icomoon-font-family}.svg?rezf1q##{$icomoon-font-family}")
       format("svg");
   font-weight: normal;
   font-style: normal;
@@ -39,5 +39,15 @@
 .icon-heart {
   &:before {
     content: $icon-heart;
+  }
+}
+.icon-chevron-down {
+  &:before {
+    content: $icon-chevron-down;
+  }
+}
+.icon-chevron-up {
+  &:before {
+    content: $icon-chevron-up;
   }
 }
