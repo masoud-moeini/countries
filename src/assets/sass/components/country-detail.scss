@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css?family=Varela+Round&display=swap");
+.country-box {
+  width: 350px;
+  margin: 0 auto;
+  .flag {
+    img {
+      width: 100%;
+    }
+  }
+  button {
+    border: none;
+    width: 80px;
+    padding: 5px 0;
+    margin: 0 0 8px 0;
+    border-radius: 5px;
+    background-color: #6db1b4;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  p {
+    font-family: "Varela Round";
+    line-height: 1.6;
+    font-size: 16px;
+    color: #365075;
+  }
+}

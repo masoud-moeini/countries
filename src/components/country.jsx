@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import Like from "./like";
+import { Link } from "react-router-dom";
 
 class Country extends Component {
   state = {};
 
-  openCountry = country => {
-    console.log(country);
-  };
   render() {
     return (
       <div className="table-row">
@@ -38,9 +36,9 @@ class Country extends Component {
           />
         </div>
         <div>
-          <button onClick={() => this.openCountry(this.props.country)}>
+          <Link className="more-button" to={"/" + this.props.country.id}>
             Know more
-          </button>
+          </Link>
         </div>
       </div>
     );

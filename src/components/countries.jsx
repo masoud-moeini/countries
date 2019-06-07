@@ -125,9 +125,8 @@ class Countries extends Component {
           .includes(this.state.userInputs.capitalSearch.toLowerCase());
       });
 
-    // here it goes search functionality
-
     const countries = paginate(searched, currentPage, pageSize);
+
     return (
       <React.Fragment>
         <div className="table-title">
