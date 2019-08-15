@@ -4,12 +4,20 @@ ul.pagination {
   flex-wrap: wrap;
   li.page-item {
     border-radius: 3px;
-    background-color: #ebebeb;
-    color: #565857;
+    background-color: #dddddd;
+    color: #565756;
     width: 30px;
     height: 30px;
     cursor: pointer;
     margin: 10px 5px 0 0;
+    transition: all 0.2s;
+
+    &.disabled {
+      color: #808080;
+      cursor: default;
+      pointer-events: none;
+      background-color: #ebebeb;
+    }
 
     &:hover {
       background-color: rgba(#8ccccf, 0.2);
@@ -18,6 +26,46 @@ ul.pagination {
     &.active {
       background-color: #8ccccf;
       color: #ffffff;
+      width: 60px;
+      position: relative;
+
+      form {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        padding: 2px;
+        border: 2px solid #8ccccf;
+        border-radius: 3px;
+        & > span {
+          display: flex;
+          width: 100%;
+          height: 100%;
+        }
+
+        input {
+          // flex: 1 1 0;
+          height: 100%;
+          border: none;
+          text-align: center;
+          width: 50%;
+        }
+        button {
+          // flex: 1 1 0;
+          width: 50%;
+          height: 100%;
+          border: none;
+          background-color: #8ccccf;
+          color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3px;
+          font-family: Arial !important;
+        }
+      }
     }
 
     .page-link {
