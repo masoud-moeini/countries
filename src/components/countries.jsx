@@ -72,7 +72,9 @@ class Countries extends Component {
   };
 
   handlePageChange = page => {
-    this.setState({ currentPage: page });
+    if (this.state.currentPage !== page) {
+      this.setState({ currentPage: page });
+    }
   };
 
   handleFilter = () => {
