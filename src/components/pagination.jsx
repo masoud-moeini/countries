@@ -35,7 +35,7 @@ class Pagination extends Component {
             </span>
           </li>
           {currentPage > 3 ? (
-            <li className="page-item">
+            <li className="page-item disabled">
               <span className="page-link">...</span>
             </li>
           ) : null}
@@ -79,7 +79,7 @@ class Pagination extends Component {
           })}
 
           {pagesCount - currentPage > 3 ? (
-            <li className="page-item">
+            <li className="page-item disabled">
               <span className="page-link">...</span>
             </li>
           ) : null}
