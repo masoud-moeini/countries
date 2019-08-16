@@ -76,7 +76,6 @@ class Countries extends Component {
   };
 
   handlePageChange = page => {
-    console.log(this.searched.length);
     if (
       this.state.currentPage !== page &&
       page >= 1 &&

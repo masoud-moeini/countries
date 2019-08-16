@@ -14,6 +14,9 @@ class Pagination extends Component {
     console.log(e.target.value);
     this.setState({ currentPage: e.target.value });
   };
+  preventDefault(e) {
+    e.preventDefault();
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.currentPage !== this.props.currentPage) {
@@ -54,9 +57,10 @@ class Pagination extends Component {
                 {currentPage === page ? (
                   <form
                     action="#"
-                    onSubmit={() =>
-                      onPageChange(parseInt(this.state.currentPage))
-                    }
+                    onSubmit={e => {
+                      this.preventDefault(e);
+                      onPageChange(parseInt(this.state.currentPage));
+                    }}
                   >
                     <span>
                       <input
