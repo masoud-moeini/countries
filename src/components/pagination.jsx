@@ -25,7 +25,18 @@ class Pagination extends Component {
   }
 
   render() {
-    const { itemsCount, pageSize, onPageChange, currentPage } = this.props;
+    const {
+      itemsCount,
+      pageSize,
+      onPageChange,
+      currentPage,
+      firstIcon,
+      lastIcon,
+      goToIcon,
+      firstText,
+      lastText,
+      goToText
+    } = this.props;
     const pagesCount = Math.ceil(itemsCount / pageSize);
     if (pagesCount === 1) return null;
     const pages = _.range(1, pagesCount + 1);
@@ -34,7 +45,10 @@ class Pagination extends Component {
         <ul className="pagination">
           <li className={"page-item " + (currentPage === 1 ? "disabled" : "")}>
             <span onClick={() => onPageChange(1)} className="page-link">
-              First
+              <i className={firstIcon} />
+              {!firstIcon ? (
+                <span>{firstText ? firstText : "First"}</span>
+              ) : null}
             </span>
           </li>
           {currentPage > 3 ? (
@@ -69,11 +83,11 @@ class Pagination extends Component {
                         onChange={e => this.handleChangeText(e)}
                       />
                       {/* <span> ${pageCount}</span> */}
-                      <button
-                        type="submit"
-                        className="icon-keyboard_arrow_left"
-                      >
-                        go
+                      <button type="submit">
+                        <i className={goToIcon} />
+                        {!goToIcon ? (
+                          <span>{goToText ? goToText : "Go"}</span>
+                        ) : null}
                       </button>
                     </span>
                   </form>
@@ -97,7 +111,8 @@ class Pagination extends Component {
               onClick={() => onPageChange(pagesCount)}
               className="page-link"
             >
-              last
+              <i className={lastIcon} />
+              {!lastIcon ? <span>{lastText ? lastText : "Last"}</span> : null}
             </span>
           </li>
         </ul>

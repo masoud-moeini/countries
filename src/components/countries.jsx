@@ -160,6 +160,12 @@ class Countries extends Component {
           pageSize={pageSize}
           onPageChange={this.handlePageChange}
           currentPage={currentPage}
+          firstIcon={"icon-chevrons-left"}
+          lastIcon={"icon-chevrons-right"}
+          goToIcon={"icon-chevron-right"}
+          firstText={"Aval"}
+          lastText={"Akhar"}
+          goToText={"Boro"}
         />
       </React.Fragment>
     );
