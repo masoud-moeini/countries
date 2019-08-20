@@ -2,6 +2,7 @@ ul.pagination {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+
   li.page-item {
     border-radius: 3px;
     background-color: #dddddd;
@@ -51,6 +52,9 @@ ul.pagination {
           border: none;
           text-align: center;
           width: 50%;
+          &:focus {
+            outline: none;
+          }
         }
         button {
           // flex: 1 1 0;
@@ -64,6 +68,7 @@ ul.pagination {
           align-items: center;
           border-radius: 3px;
           font-family: Arial !important;
+          outline: none;
           cursor: pointer;
         }
       }
