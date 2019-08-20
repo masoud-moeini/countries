@@ -35,7 +35,8 @@ class Pagination extends Component {
       goToIcon,
       firstText,
       lastText,
-      goToText
+      goToText,
+      shape
     } = this.props;
     const pagesCount = Math.ceil(itemsCount / pageSize);
     if (pagesCount === 1) return null;
@@ -43,7 +44,13 @@ class Pagination extends Component {
     return (
       <nav>
         <ul className="pagination">
-          <li className={"page-item " + (currentPage === 1 ? "disabled" : "")}>
+          <li
+            className={
+              "page-item " +
+              (currentPage === 1 ? "disabled " : "") +
+              (shape === "square" ? "square-shape" : "")
+            }
+          >
             <span onClick={() => onPageChange(1)} className="page-link">
               <i className={firstIcon} />
               {!firstIcon ? (
@@ -52,7 +59,12 @@ class Pagination extends Component {
             </span>
           </li>
           {currentPage > 3 ? (
-            <li className="page-item disabled">
+            <li
+              className={
+                "page-item disabled " +
+                (shape === "square" ? "square-shape" : "")
+              }
+            >
               <span className="page-link">...</span>
             </li>
           ) : null}
@@ -61,7 +73,8 @@ class Pagination extends Component {
             return currentPage - page < 3 && page - currentPage < 3 ? (
               <li
                 className={
-                  page === currentPage ? "page-item active" : "page-item"
+                  (page === currentPage ? "page-item active " : "page-item ") +
+                  (shape === "square" ? "square-shape" : "")
                 }
                 key={page}
               >
@@ -70,6 +83,7 @@ class Pagination extends Component {
                 </span>
                 {currentPage === page ? (
                   <form
+                    className={shape === "square" ? "square-shape" : ""}
                     action="#"
                     onSubmit={e => {
                       this.preventDefault(e);
@@ -78,12 +92,16 @@ class Pagination extends Component {
                   >
                     <span>
                       <input
+                        className={shape === "square" ? "square-shape" : ""}
                         type="tel"
                         value={this.state.currentPage}
                         onChange={e => this.handleChangeText(e)}
                       />
                       {/* <span> ${pageCount}</span> */}
-                      <button type="submit">
+                      <button
+                        type="submit"
+                        className={shape === "square" ? "square-shape" : ""}
+                      >
                         <i className={goToIcon} />
                         {!goToIcon ? (
                           <span>{goToText ? goToText : "Go"}</span>
@@ -97,14 +115,21 @@ class Pagination extends Component {
           })}
 
           {pagesCount - currentPage > 3 ? (
-            <li className="page-item disabled">
+            <li
+              className={
+                "page-item disabled " +
+                (shape === "square" ? "square-shape" : "")
+              }
+            >
               <span className="page-link">...</span>
             </li>
           ) : null}
 
           <li
             className={
-              "page-item " + (currentPage === pagesCount ? "disabled" : "")
+              "page-item " +
+              (currentPage === pagesCount ? "disabled " : "") +
+              (shape === "square" ? "square-shape" : "")
             }
           >
             <span

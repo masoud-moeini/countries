@@ -166,6 +166,7 @@ class Countries extends Component {
           firstText={"Aval"}
           lastText={"Akhar"}
           goToText={"Boro"}
+          shape={"square"}
         />
       </React.Fragment>
     );
