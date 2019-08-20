@@ -17,6 +17,10 @@ class Pagination extends Component {
   preventDefault(e) {
     e.preventDefault();
   }
+  inputFocuseHandler(event) {
+    event.target.select();
+    console.log(event.target);
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.currentPage !== this.props.currentPage) {
@@ -96,6 +100,7 @@ class Pagination extends Component {
                         type="tel"
                         value={this.state.currentPage}
                         onChange={e => this.handleChangeText(e)}
+                        onFocus={e => this.inputFocuseHandler(e)}
                       />
                       {/* <span> ${pageCount}</span> */}
                       <button
