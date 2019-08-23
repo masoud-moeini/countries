@@ -46,8 +46,23 @@
     content: $icon-chevron-down;
   }
 }
+.icon-chevron-right {
+  &:before {
+    content: $icon-chevron-right;
+  }
+}
 .icon-chevron-up {
   &:before {
     content: $icon-chevron-up;
+  }
+}
+.icon-chevrons-left {
+  &:before {
+    content: $icon-chevrons-left;
+  }
+}
+.icon-chevrons-right {
+  &:before {
+    content: $icon-chevrons-right;
   }
 }

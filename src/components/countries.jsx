@@ -20,6 +20,10 @@ class Countries extends Component {
       capitalSearch: ""
     }
   };
+  constructor() {
+    super();
+    this.searched = null;
+  }
   componentDidMount() {
     db.table("countries")
       .toArray()
@@ -72,7 +76,13 @@ class Countries extends Component {
   };
 
   handlePageChange = page => {
-    this.setState({ currentPage: page });
+    if (
+      this.state.currentPage !== page &&
+      page >= 1 &&
+      page <= this.searched.length / this.state.pageSize
+    ) {
+      this.setState({ currentPage: page });
+    }
   };
 
   handleFilter = () => {
@@ -113,7 +123,7 @@ class Countries extends Component {
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
-    const searched = sorted
+    this.searched = sorted
       .filter(country => {
         return country.name
           .toLowerCase()
@@ -125,12 +135,12 @@ class Countries extends Component {
           .includes(this.state.userInputs.capitalSearch.toLowerCase());
       });
 
-    const countries = paginate(searched, currentPage, pageSize);
+    const countries = paginate(this.searched, currentPage, pageSize);
 
     return (
       <React.Fragment>
         <div className="table-title">
-          <span>Showing {searched.length} countries in the world</span>
+          <span>Showing {this.searched.length} countries in the world</span>
           <ShowLiked
             toSelectItem={toSelectCategory}
             onButtonSelect={this.handleFilter}
@@ -146,10 +156,17 @@ class Countries extends Component {
           userInputs={this.state.userInputs}
         />
         <Pagination
-          itemsCount={searched.length}
+          itemsCount={this.searched.length}
           pageSize={pageSize}
           onPageChange={this.handlePageChange}
           currentPage={currentPage}
+          firstIcon={"icon-chevrons-left"}
+          lastIcon={"icon-chevrons-right"}
+          goToIcon={"icon-chevron-right"}
+          firstText={"Aval"}
+          lastText={"Akhar"}
+          goToText={"Boro"}
+          shape={"square"}
         />
       </React.Fragment>
     );

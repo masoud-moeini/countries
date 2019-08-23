@@ -39,7 +39,7 @@
 *::before,
 *::after {
   box-sizing: inherit;
-  outline: inherit;
+  // outline: inherit;
 }
 
 html {
@@ -48,9 +48,8 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Lato", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Lato", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f7f8fa;
@@ -58,6 +57,5 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

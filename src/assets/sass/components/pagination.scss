@@ -2,14 +2,26 @@ ul.pagination {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+
   li.page-item {
-    border-radius: 3px;
-    background-color: #ebebeb;
-    color: #565857;
+    border-radius: 15px;
+    background-color: #dddddd;
+    color: #565756;
     width: 30px;
     height: 30px;
     cursor: pointer;
     margin: 10px 5px 0 0;
+    transition: all 0.2s;
+    &.square-shape {
+      border-radius: 3px;
+    }
+
+    &.disabled {
+      color: #808080;
+      cursor: default;
+      pointer-events: none;
+      background-color: #ebebeb;
+    }
 
     &:hover {
       background-color: rgba(#8ccccf, 0.2);
@@ -18,6 +30,63 @@ ul.pagination {
     &.active {
       background-color: #8ccccf;
       color: #ffffff;
+      width: 60px;
+      position: relative;
+
+      form {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        padding: 2px;
+        border: 2px solid #8ccccf;
+        border-radius: 15px;
+        &.square-shape {
+          border-radius: 3px;
+        }
+        & > span {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+        }
+
+        input {
+          flex: 1 1 0;
+          height: 100%;
+          min-width: 0;
+          border: none;
+          text-align: center;
+          width: 50%;
+          border-radius: 15px;
+          &.square-shape {
+            border-radius: 3px;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+        button {
+          // flex: 1 1 0;
+          width: 24px;
+          height: 24px;
+          border: none;
+          background-color: #8ccccf;
+          color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 12px;
+          font-family: Arial !important;
+          outline: none;
+          cursor: pointer;
+          &.square-shape {
+            border-radius: 3px;
+          }
+        }
+      }
     }
 
     .page-link {
@@ -28,4 +97,19 @@ ul.pagination {
       align-items: center;
     }
   }
+  // li.ellipsis-item {
+  //   width: 30px;
+  //   height: 30px;
+  //   margin: 10px 5px 0 0;
+  //   transition: all 0.2s;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   .page-link {
+  //     width: 100%;
+  //     height: 100%;
+  //     text-align: center;
+  //     letter-spacing: 2px;
+  //   }
+  // }
 }
